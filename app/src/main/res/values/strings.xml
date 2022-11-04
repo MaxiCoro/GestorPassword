@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">Gestion de contraseñas</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Gestion de Contraseñas</string>
+    <string name="nav_header_subtitle">apruebemeProfe@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    //Menu de navegacion
+    <string name="menu_home">Inicio</string>
+    <string name="menu_passwords">Contraseñas</string>
+    <string name="menu_cards">Tarjetas</string>
+    <string name="menu_notes">Notas</string>
+
+    //Botones
+    <string name="btn_Cancelar">Cancelar</string>
+    <string name="btn_Guardar">Guardar</string>
+
+    //Texto nueva password
+    <string name="newPassword_URL">URL</string>
+    <string name="newPassword_Nombre">Nombre</string>
+    <string name="newPassword_Usuario">Usuario</string>
+    <string name="newPassword_Contraseña">Contraseña</string>
+
+    //Texto nueva nota
+    <string name="newNote_Nombre">Nombre</string>
+    <string name="newNote_Descripcion">Descripcion</string>
+
+    //Texto nueva tarjeta
+    <string name="newCard_Titular">Nombre del titular</string>
+    <string name="newCard_Tipo">Tipo</string>
+    <string name="newCard_NroTarjeta">Numero de tarjeta</string>
+    <string name="newCard_FInicio">Fecha de inicio:</string>
+    <string name="newCard_FFin">Fecha de fin:</string>
+    <string name="newCard_Extra">Informacion adicional</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
