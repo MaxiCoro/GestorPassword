@@ -3,10 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/GestionContra/GestorPassword/app/src/main/res/layout/fragment_cards.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GestionContra/GestorPassword/app/src/main/res/layout/fragment_new_card.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GestionContra/GestorPassword/app/src/main/res/layout/fragment_new_note.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GestionContra/GestorPassword/app/src/main/res/layout/fragment_new_password.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GestionContra/GestorPassword/app/src/main/res/layout/fragment_notes.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GestionContra/GestorPassword/app/src/main/res/layout/fragment_password.xml" value="0.17074275362318841" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GestionContra/GestorPassword/app/src/main/res/layout/itemlist_card.xml" value="0.22447916666666667" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GestionContra/GestorPassword/app/src/main/res/layout/itemlist_note.xml" value="0.33" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GestionContra/GestorPassword/app/src/main/res/layout/itemlist_password.xml" value="0.17074275362318841" />
       </map>

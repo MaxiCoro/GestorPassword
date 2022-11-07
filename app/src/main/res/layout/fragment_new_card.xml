@@ -13,12 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/newCard_Titular"
+
         >
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textFieldCard_Titular"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
+            android:inputType="text"
+            />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -152,20 +154,20 @@
         android:layout_marginTop="30dp">
 
         <Button
-            android:id="@+id/buttonPasswordCancelar"
-            android:layout_width="20dp"
+            android:id="@+id/buttonCard_Cancelar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/lightgray"
-            android:text="@string/btn_Cancelar" />
+            android:text="@string/btn_Cancelar"
+            android:backgroundTint="@color/lightgray"/>
 
         <Button
-            android:id="@+id/buttonPasswordGuardar"
-            android:layout_width="20dp"
+            android:id="@+id/buttonCard_Guardar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
             android:layout_weight="1"
-            android:text="@string/btn_Guardar" />
+            android:text="@string/btn_Guardar"
+            android:layout_marginLeft="10dp"/>
     </LinearLayout>
 
 </LinearLayout>

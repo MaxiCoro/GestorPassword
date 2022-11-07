@@ -1,5 +1,7 @@
 package com.example.navigationdrawer.ExtraFragments;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,7 +13,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
+import com.example.navigationdrawer.Database.CardContract;
+import com.example.navigationdrawer.Database.CardDbHelper;
+import com.example.navigationdrawer.Database.PasswordContract;
 import com.example.navigationdrawer.R;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -26,11 +32,11 @@ public class NewCardFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private CardDbHelper dbHelper;
 
     String[] meses = {"01 - Enero", "02 - Febrero", "03 - Marzo", "04 - Abril", "05 - Mayo", "06 - Junio", "07 - Julio", "08 - Agosto", "09 - Septiembre", "10 - Octubre", "11 - Noviembre", "12 - Diciembre"};
     Spinner spinnerInicio;
     Spinner spinnerFin;
-
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -73,13 +79,14 @@ public class NewCardFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_new_card, container, false);
 
+        dbHelper = new CardDbHelper(getContext());
         spinnerInicio = root.findViewById(R.id.spinnerCard_FInicioMes);
         spinnerInicio.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, meses));
 
         spinnerFin = root.findViewById(R.id.spinnerCard_FFinMes);
         spinnerFin.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, meses));
 
-        Button btn_Cancelar = root.findViewById(R.id.buttonPasswordCancelar);
+        Button btn_Cancelar = root.findViewById(R.id.buttonCard_Cancelar);
         btn_Cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,7 +94,7 @@ public class NewCardFragment extends Fragment {
             }
         });
 
-        Button btn_Guardar = root.findViewById(R.id.buttonPasswordGuardar);
+        Button btn_Guardar = root.findViewById(R.id.buttonCard_Guardar);
         btn_Guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,21 +106,34 @@ public class NewCardFragment extends Fragment {
     }
 
     private void guardarDatos(View view){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues valores = new ContentValues();
+        String fInicio = "";
+        String fFin = "";
+
         TextInputEditText infoTitular = view.findViewById(R.id.textFieldCard_Titular);
         TextInputEditText infoTipo = view.findViewById(R.id.textFieldCard_Tipo);
         TextInputEditText infoNroTarjeta = view.findViewById(R.id.textFieldCard_NroTarj);
         TextInputEditText infoInicioAnio = view.findViewById(R.id.textFieldCard_FInicioAnio);
         TextInputEditText infoFinAnio = view.findViewById(R.id.textFieldCard_FFinAnio);
-        TextInputEditText infoExtra = view.findViewById(R.id.textFieldCard_Extra);
+        EditText infoExtra = view.findViewById(R.id.textFieldCard_Extra);
 
-        spinnerInicio.getSelectedItemPosition();
-        spinnerFin.getSelectedItemPosition();
-        String titular = infoTitular.getText().toString();
-        String tipo = infoTipo.getText().toString();
-        Integer nroTarjeta = Integer.parseInt(infoNroTarjeta.getText().toString());
-        Integer inicioAnio = Integer.parseInt(infoInicioAnio.getText().toString());
-        Integer finAnio = Integer.parseInt(infoFinAnio.getText().toString());
-        String extra = infoExtra.getText().toString();
+        fInicio = "" + ((spinnerInicio.getSelectedItemPosition() + 1) + " / " + infoInicioAnio.getText().toString());
+        fFin = "" + ((spinnerFin.getSelectedItemPosition() + 1) + " / " + infoFinAnio.getText().toString());
+        valores.put(CardContract.CardEntry.COLUMN_NAME_TITULAR, infoTitular.getText().toString());
+        valores.put(CardContract.CardEntry.COLUMN_NAME_TIPO, infoTipo.getText().toString());
+        valores.put(CardContract.CardEntry.COLUMN_NAME_NROTARJETA, infoNroTarjeta.getText().toString());
+        valores.put(CardContract.CardEntry.COLUMN_NAME_FINICIO, fInicio);
+        valores.put(CardContract.CardEntry.COLUMN_NAME_FFIN, fFin);
+        valores.put(CardContract.CardEntry.COLUMN_NAME_EXTRA, infoExtra.getText().toString());
+
+        long newRowId = db.insert(CardContract.CardEntry.TABLE_NAME, null, valores);
+
+        if (newRowId != -1){
+            Toast.makeText(this.getContext(), "Tarjeta guardada", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this.getContext(), "Error al guardar", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void limpiarInformacion(View view){
