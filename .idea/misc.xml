@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/GestionContra/GestorPassword/app/src/main/res/layout/activity_main.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GestionContra/GestorPassword/app/src/main/res/layout/app_bar_main.xml" value="0.17300724637681159" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/GestionContra/GestorPassword/app/src/main/res/layout/content_main.xml" value="0.17300724637681159" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GestionContra/GestorPassword/app/src/main/res/layout/fragment_cards.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GestionContra/GestorPassword/app/src/main/res/layout/fragment_new_card.xml" value="0.17074275362318841" />
         <entry key="..\:/Users/User/AndroidStudioProjects/GestionContra/GestorPassword/app/src/main/res/layout/fragment_new_note.xml" value="0.17074275362318841" />
