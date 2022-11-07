@@ -18,16 +18,19 @@
     <string name="btn_Guardar">Guardar</string>
 
     //Texto nueva password
+    <string name="newPassword_Header">Nueva Contraseña</string>
     <string name="newPassword_URL">URL</string>
     <string name="newPassword_Nombre">Nombre</string>
     <string name="newPassword_Usuario">Usuario</string>
     <string name="newPassword_Contraseña">Contraseña</string>
 
     //Texto nueva nota
+    <string name="newNote_Header">Nueva Nota</string>
     <string name="newNote_Nombre">Nombre</string>
     <string name="newNote_Descripcion">Descripcion</string>
 
     //Texto nueva tarjeta
+    <string name="newCard_Header">Nueva Tarjeta</string>
     <string name="newCard_Titular">Nombre del titular</string>
     <string name="newCard_Tipo">Tipo</string>
     <string name="newCard_NroTarjeta">Numero de tarjeta</string>

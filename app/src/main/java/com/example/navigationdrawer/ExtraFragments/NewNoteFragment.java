@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.navigationdrawer.Database.NoteContract;
 import com.example.navigationdrawer.Database.NoteDbHelper;
+import com.example.navigationdrawer.NotesFragment;
 import com.example.navigationdrawer.R;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -30,6 +32,7 @@ public class NewNoteFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private NoteDbHelper dbHelper;
+    private FragmentTransaction transaction;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -71,12 +74,15 @@ public class NewNoteFragment extends Fragment {
                              Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_new_note, container, false);
 
+        transaction = getActivity().getSupportFragmentManager().beginTransaction();
         dbHelper = new NoteDbHelper(this.getContext());
         Button btn_Cancelar = root.findViewById(R.id.buttonNote_Cancelar);
         btn_Cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                limpiarInformacion(root);
+                NotesFragment fragment = new NotesFragment();
+                transaction.replace(R.id.fragmentHolder, fragment);
+                transaction.commit();
             }
         });
 
@@ -85,18 +91,13 @@ public class NewNoteFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 guardarDatos(root);
+                NotesFragment fragment = new NotesFragment();
+                transaction.replace(R.id.fragmentHolder, fragment);
+                transaction.commit();
             }
         });
 
         return root;
-    }
-
-    private void limpiarInformacion(View view){
-        TextInputEditText infoNombre = view.findViewById(R.id.textFieldNote_Nombre);
-        TextInputEditText infoDescripcion = view.findViewById(R.id.textFieldNote_Informacion);
-
-        infoNombre.setText("");
-        infoDescripcion.setText("");
     }
 
     private void guardarDatos(View view){

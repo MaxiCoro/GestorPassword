@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.navigationdrawer.CardsFragment;
 import com.example.navigationdrawer.Database.CardContract;
 import com.example.navigationdrawer.Database.CardDbHelper;
 import com.example.navigationdrawer.Database.PasswordContract;
@@ -33,6 +35,7 @@ public class NewCardFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private CardDbHelper dbHelper;
+    private FragmentTransaction transaction;
 
     String[] meses = {"01 - Enero", "02 - Febrero", "03 - Marzo", "04 - Abril", "05 - Mayo", "06 - Junio", "07 - Julio", "08 - Agosto", "09 - Septiembre", "10 - Octubre", "11 - Noviembre", "12 - Diciembre"};
     Spinner spinnerInicio;
@@ -79,6 +82,7 @@ public class NewCardFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_new_card, container, false);
 
+        transaction = getActivity().getSupportFragmentManager().beginTransaction();
         dbHelper = new CardDbHelper(getContext());
         spinnerInicio = root.findViewById(R.id.spinnerCard_FInicioMes);
         spinnerInicio.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, meses));
@@ -90,7 +94,9 @@ public class NewCardFragment extends Fragment {
         btn_Cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                limpiarInformacion(root);
+                CardsFragment fragment = new CardsFragment();
+                transaction.replace(R.id.fragmentHolder, fragment);
+                transaction.commit();
             }
         });
 
@@ -99,6 +105,9 @@ public class NewCardFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 guardarDatos(root);
+                CardsFragment fragment = new CardsFragment();
+                transaction.replace(R.id.fragmentHolder, fragment);
+                transaction.commit();
             }
         });
 
@@ -134,23 +143,5 @@ public class NewCardFragment extends Fragment {
         } else {
             Toast.makeText(this.getContext(), "Error al guardar", Toast.LENGTH_LONG).show();
         }
-    }
-
-    private void limpiarInformacion(View view){
-        TextInputEditText infoTitular = view.findViewById(R.id.textFieldCard_Titular);
-        TextInputEditText infoTipo = view.findViewById(R.id.textFieldCard_Tipo);
-        TextInputEditText infoNroTarjeta = view.findViewById(R.id.textFieldCard_NroTarj);
-        TextInputEditText infoInicioAnio = view.findViewById(R.id.textFieldCard_FInicioAnio);
-        TextInputEditText infoFinAnio = view.findViewById(R.id.textFieldCard_FFinAnio);
-        EditText infoExtra = view.findViewById(R.id.textFieldCard_Extra);
-
-        infoTitular.setText("");
-        infoTipo.setText("");
-        infoNroTarjeta.setText("");
-        infoInicioAnio.setText("");
-        infoFinAnio.setText("");
-        infoExtra.setText("");
-        spinnerInicio.setSelection(0);
-        spinnerFin.setSelection(0);
     }
 }

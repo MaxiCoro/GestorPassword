@@ -7,10 +7,26 @@
     tools:context=".ExtraFragments.NewNoteFragment"
     android:padding="16dp">
 
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/newNote_Header"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
+    <View
+        android:id="@+id/divider2"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:backgroundTint="@color/teal_700"
+        android:background="?android:attr/listDivider" />
+
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:hint="@string/newNote_Nombre">
 
         <com.google.android.material.textfield.TextInputEditText

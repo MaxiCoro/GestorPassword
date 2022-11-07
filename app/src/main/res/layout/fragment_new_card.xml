@@ -8,10 +8,26 @@
     tools:context=".ExtraFragments.NewCardFragment"
     android:padding="16dp">
 
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/newCard_Header"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:backgroundTint="@color/teal_700"
+        android:background="?android:attr/listDivider" />
+
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:hint="@string/newCard_Titular"
 
         >
