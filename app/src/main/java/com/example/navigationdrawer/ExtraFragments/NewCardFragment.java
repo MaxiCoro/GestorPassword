@@ -79,7 +79,7 @@ public class NewCardFragment extends Fragment {
         spinnerFin = root.findViewById(R.id.spinnerCard_FFinMes);
         spinnerFin.setAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, meses));
 
-        Button btn_Cancelar = root.findViewById(R.id.buttonCancelar);
+        Button btn_Cancelar = root.findViewById(R.id.buttonPasswordCancelar);
         btn_Cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,7 +87,7 @@ public class NewCardFragment extends Fragment {
             }
         });
 
-        Button btn_Guardar = root.findViewById(R.id.buttonGuardar);
+        Button btn_Guardar = root.findViewById(R.id.buttonPasswordGuardar);
         btn_Guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

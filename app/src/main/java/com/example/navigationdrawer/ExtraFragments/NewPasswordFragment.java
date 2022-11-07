@@ -1,5 +1,7 @@
 package com.example.navigationdrawer.ExtraFragments;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,7 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.example.navigationdrawer.Database.PasswordContract;
+import com.example.navigationdrawer.Database.PasswordDbHelper;
 import com.example.navigationdrawer.R;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -23,6 +28,7 @@ public class NewPasswordFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private PasswordDbHelper dbHelper;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -57,8 +63,6 @@ public class NewPasswordFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
     }
 
     @Override
@@ -67,7 +71,8 @@ public class NewPasswordFragment extends Fragment {
 
         View root = inflater.inflate(R.layout.fragment_new_password, container, false);
 
-        Button btnCancelar = root.findViewById(R.id.buttonCancelar);
+        dbHelper = new PasswordDbHelper(this.getContext());
+        Button btnCancelar = root.findViewById(R.id.buttonPasswordCancelar);
         btnCancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,7 +80,7 @@ public class NewPasswordFragment extends Fragment {
             }
         });
 
-        Button btnGuardar = root.findViewById(R.id.buttonGuardar);
+        Button btnGuardar = root.findViewById(R.id.buttonPasswordGuardar);
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,15 +93,28 @@ public class NewPasswordFragment extends Fragment {
 
 
     private void guardarDatos(View view){
+
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues valores = new ContentValues();
+
         TextInputEditText infoURL = view.findViewById(R.id.textFieldPass_URL);
         TextInputEditText infoNombre = view.findViewById(R.id.textFieldPass_Nombre);
         TextInputEditText infoUsuario = view.findViewById(R.id.textFieldPass_Usuario);
         TextInputEditText infoContra = view.findViewById(R.id.textFieldPass_Password);
 
-        String url = infoURL.getText().toString();
-        String nombre = infoNombre.getText().toString();
-        String usuario = infoUsuario.getText().toString();
-        String contra = infoContra.getText().toString();
+        valores.put(PasswordContract.PasswordEntry.COLUMN_NAME_NOMBRE, infoNombre.getText().toString());
+        valores.put(PasswordContract.PasswordEntry.COLUMN_NAME_URL, infoURL.getText().toString());
+        valores.put(PasswordContract.PasswordEntry.COLUMN_NAME_USUARIO, infoUsuario.getText().toString());
+        valores.put(PasswordContract.PasswordEntry.COLUMN_NAME_PASSWORD, infoContra.getText().toString());
+
+        long newRowId = db.insert(PasswordContract.PasswordEntry.TABLE_NAME, null, valores);
+
+        if (newRowId != -1){
+            Toast.makeText(this.getContext(), "Contraseña guardada", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this.getContext(), "Error al guardar", Toast.LENGTH_LONG).show();
+        }
+
     }
 
     private void limpiarInformacion(View view){

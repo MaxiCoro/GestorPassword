@@ -1,5 +1,7 @@
 package com.example.navigationdrawer.ExtraFragments;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,7 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.navigationdrawer.Database.NoteContract;
+import com.example.navigationdrawer.Database.NoteDbHelper;
 import com.example.navigationdrawer.R;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -23,6 +29,7 @@ public class NewNoteFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private NoteDbHelper dbHelper;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -62,10 +69,10 @@ public class NewNoteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View root = inflater.inflate(R.layout.fragment_new_note, container, false);
 
-        Button btn_Cancelar = root.findViewById(R.id.buttonCancelar);
+        dbHelper = new NoteDbHelper(this.getContext());
+        Button btn_Cancelar = root.findViewById(R.id.buttonNote_Cancelar);
         btn_Cancelar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,7 +80,7 @@ public class NewNoteFragment extends Fragment {
             }
         });
 
-        Button btn_Guardar = root.findViewById(R.id.buttonGuardar);
+        Button btn_Guardar = root.findViewById(R.id.buttonNote_Guardar);
         btn_Guardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,10 +100,22 @@ public class NewNoteFragment extends Fragment {
     }
 
     private void guardarDatos(View view){
-        TextInputEditText infoNombre = view.findViewById(R.id.textFieldNote_Nombre);
-        TextInputEditText infoDescripcion = view.findViewById(R.id.textFieldNote_Informacion);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues valores = new ContentValues();
 
-        String nombre = infoNombre.getText().toString();
-        String descripcion = infoDescripcion.getText().toString();
+        TextInputEditText infoNombre = view.findViewById(R.id.textFieldNote_Nombre);
+        EditText infoDescripcion = view.findViewById(R.id.textFieldNote_Informacion);
+
+        valores.put(NoteContract.NoteEntry.COLUMN_NAME_NOMBRE, infoNombre.getText().toString());
+        valores.put(NoteContract.NoteEntry.COLUMN_NAME_DESCRIPCION, infoDescripcion.getText().toString());
+
+        long newRowId = db.insert(NoteContract.NoteEntry.TABLE_NAME, null, valores);
+
+        if (newRowId != -1){
+            Toast.makeText(this.getContext(), "Nota guardada", Toast.LENGTH_LONG).show();
+        } else {
+            Toast.makeText(this.getContext(), "Error al guardar", Toast.LENGTH_LONG).show();
+        }
     }
+
 }

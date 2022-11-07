@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             transaction.replace(R.id.fragmentHolder, fragment);
 
         }  else if (id == R.id.nav_supervisor) {
-            NewPasswordFragment fragment = new NewPasswordFragment();
+            NotesFragment fragment = new NotesFragment();
             transaction.replace(R.id.fragmentHolder, fragment);
 
         }

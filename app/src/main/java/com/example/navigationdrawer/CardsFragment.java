@@ -16,7 +16,7 @@ public class CardsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_slideshow, container, false);
+        View view = inflater.inflate(R.layout.fragment_cards, container, false);
 
         return view;
     }
